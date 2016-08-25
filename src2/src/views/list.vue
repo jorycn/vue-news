@@ -1,19 +1,34 @@
+<style>
+    .list-container{
+    }
+    .more-btn {
+        font-size: 1.5rem;
+        padding: 1rem 0;
+        width: 100%;
+        border: 0;
+        color: #fff;
+        background-color: #252e39;
+        border: none;
+        margin: 10px 0;
+        border-radius: .5rem;
+        outline: none;
+        cursor: pointer;
+    }
+    .more-btn:hover {
+        background-color: #455569;
+    }
+</style>
 
 <template>
-  <scroller lock-x scrollbar-y use-pullup v-ref:scroller :pullup-config="pullupConfig" @pullup:loading="load" height="-46px">
-      <!--content slot-->
-      <div class="box2">
-          <div class="list-container">
-              <cov-articles :articles="value.articles" :date="value.date" v-for="(key, value) of days"></cov-articles>
-          </div>
-      </div>
-    </scroller>
+    <div class="list-container">
+        <cov-articles :articles="value.articles" :date="value.date" v-for="(key, value) of days"></cov-articles>
+    </div>
+    <button class="more-btn" @click="dataPointerCalc(true)">更多</button>
 </template>
 
 <script>
 import covArticles from './articles.vue'
 import { setAticles, setDatePointer } from '../vuex/action'
-import { Scroller, Spinner } from 'vux-components'
 
 export default {
   vuex: {
@@ -26,43 +41,26 @@ export default {
       setDatePointer
     }
   },
-  data () {
-    return {
-      pullupConfig: {
-        content: '上拉加载更多',
-        downContent: '松开进行加载',
-        upContent: '上拉加载更多',
-        loadingContent: '加载中...'
-      }
-    }
-  },
   components: {
-    covArticles,
-    Scroller,
-    Spinner
+    covArticles
   },
   created () {
     this.dataPointerCalc()
   },
   methods: {
-    load (uuid) {
-      setTimeout(() => {
-        this.dataPointerCalc(true, uuid)
-      }, 10)
-    },
-    dataPointerCalc (plus, uuid) {
+    dataPointerCalc (plus) {
       if (!this.datePointer.value) {
         this.setDatePointer(new Date())
-        this.fetchList(uuid)
+        this.fetchList()
       } else {
         if (plus) {
           let nextDay = new Date(this.datePointer.format)
           this.setDatePointer(new Date(nextDay - 86400000))
-          this.fetchList(uuid)
+          this.fetchList()
         }
       }
     },
-    fetchList (uuid) {
+    fetchList () {
       this.$http.get(this.$Api('http://news.at.zhihu.com/api/4/news/before/' + this.datePointer.value))
         .then(response => {
           const data = response.data
@@ -76,15 +74,8 @@ export default {
             })
           }
           this.setAticles(this.datePointer.format, arr)
-          setTimeout(() => {
-            this.$broadcast('pullup:reset', uuid)
-          }, 10)
         })
     }
   }
 }
 </script>
-
-<style scoped>
-  .box2{margin-bottom: 55px}
-</style>

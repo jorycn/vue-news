@@ -1,31 +1,16 @@
-<style>
-    .zhi-list {
-        position: relative;
-        padding: 0;
-        padding-top: 5rem;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid #ECECEC;
-    }
-    .list-date {
-        position: absolute;
-        font-size: 2rem;
-        text-align: center;
-        top: 2rem;
-        left: 1rem;
-        color: #b2bac2;
-        font-weight: 500;
-    }
-</style>
+
 
 <template>
-    <section class="zhi-list">
-        <div class="list-date">{{date}}</div>
+    <divider>{{date}}</divider>
+    <div class="weui_cells">
         <cov-article v-for="data in articles" :data="data"></cov-article>  
-    </section>
+    </div>
 </template>
 
 <script>
   import covArticle from './article.vue'
+  import { Divider } from 'vux-components'
+
   export default {
     props: {
       'articles': {
@@ -40,7 +25,8 @@
       }
     },
     components: {
-      covArticle
+      covArticle,
+      Divider
     }
   }
 </script>

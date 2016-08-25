@@ -5,7 +5,7 @@ import VueResource from 'vue-resource'
 import VueProgressbar from 'vue-progressbar'
 import { sync } from 'vuex-router-sync'
 
-import App from './views/app'
+import App from './app'
 import store from './vuex/store'
 import router from './route'
 import CovLocalDB from './util'

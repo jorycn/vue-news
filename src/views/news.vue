@@ -1,68 +1,30 @@
-<style src="../assets/zhihu.css"></style>
-<style>
-    .news-content {
-        width: 80rem;
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: 0 0 .625rem .08rem rgba(0,0,0,.05);
-    }
-    .news-content p > img {
-        width: 100%;
-    }
-    .news-cover {
-        height: 25rem;
-        background-size: cover;
-        position: relative;
-    }
-    .news-title {
-        font-size: 3rem;
-        color: #fff;
-        position: absolute;
-        bottom: 4rem;
-        width: 75rem;
-        left: 2.5rem;
-    }
-    .news-cover-source {
-        color: #E2E2E2;
-        bottom: .5rem;
-        right: 2.5rem;
-        position: absolute;
-        font-size: 1.5rem;
-    }
-    p {
-        font-size: 1.6rem;
-        line-height: 2;
-    }
-    .main-wrap {
-        max-width: 80rem;
-    }
-    @media all and (max-width: 768px) {
-        .news-content {
-            width: 100%;
-        }
-        .news-title {
-            width: 100%;
-            left: 0;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-    }
-</style>
 <template>
-    <article class="news-item">
-        <div class="news-content">
-            <div v-if="hasCoverImage" class="news-cover" :style="{'background-image': 'url('+ coverImage +')'}">
-                <p class="news-title">{{news.title}}</p>
-                <span class="news-cover-source">{{news.image_source}}</span>
+        <div class="article">
+            <div class="hd">
+                <masker style="border-radius: 2px;">
+                  <div class="m-img" v-if="hasCoverImage" :style="{'backgroundImage': 'url('+ coverImage +')'}"></div>
+                  <div slot="content" class="m-title">
+                    {{news.title}}
+                  </div>
+                </masker>
             </div>
-            {{{news.body}}}
+            <div class="bd">
+                <article class="weui_article">
+                    {{{news.body}}}
+                </article>
+            </div>
         </div>
-    </article>
 </template>
 
 <script>
   import { WAIT_IMG } from '../util'
+  import { Scroller, Masker } from 'vux-components'
+
   export default {
+    components: {
+      Scroller,
+      Masker
+    },
     data () {
       return {
         hasCoverImage: false,
@@ -74,19 +36,6 @@
       this.fetchNews(this.$route.params.id)
     },
     methods: {
-      newsContent (body) {
-        const imgReg = /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g
-        const srcReg = /htt(p|ps):\/\/.*?(png|jpg|jpeg|gif|webp|svg)/
-        const imgs = body.match(imgReg)
-        imgs.forEach(img => {
-          let imgSrc = img.match(srcReg)[0]
-          this.$covImg(this, imgSrc, cloudSrc => {
-            body = body.replace(imgSrc, cloudSrc)
-          })
-        })
-
-        return body
-      },
       loadImg () {
         let imgs = this.$el.getElementsByTagName('img')
         for (let img of imgs) {
@@ -96,6 +45,11 @@
             })
           }
         }
+      },
+      refresh () {
+        setTimeout(() => {
+          this.$refs.scroller.reset()
+        }, 500)
       },
       fetchNews (id) {
         this.$http.get(this.$Api(`http://news-at.zhihu.com/api/4/news/${id}`))
@@ -114,3 +68,32 @@
     }
   }
 </script>
+
+<style scoped>
+.m-img {
+  padding-bottom: 33%;
+  display: block;
+  position: relative;
+  max-width: 100%;
+  background-size: cover;
+  background-position: center center;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.m-title {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+  font-weight: 500;
+  font-size: 16px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 85%;
+  text-align: center;
+  top: 50%;
+  margin: 0 auto;
+  transform: translateY(-50%);
+}
+</style>
