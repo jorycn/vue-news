@@ -1,4 +1,3 @@
-<style src="../assets/base.css"></style>
 <template>
   <div id="app">
     <head-bar></head-bar>
@@ -23,3 +22,7 @@ export default {
   }
 }
 </script>
+
+<style>
+  #app{max-width:660px;margin:0 auto;}
+</style>

@@ -2,7 +2,7 @@
 
 <template>
     <divider>{{date}}</divider>
-    <div class="weui_cells">
+    <div class="item__list">
         <cov-article v-for="data in articles" :data="data"></cov-article>  
     </div>
 </template>
@@ -32,3 +32,12 @@
     }
   }
 </script>
+
+<style lang="less">
+  .item__list{
+
+    img{
+      width:100%
+    }
+  }
+</style>
