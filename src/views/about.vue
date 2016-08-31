@@ -1,7 +1,7 @@
 <template>
-    <div class="about-container">
-         么么哒~<br/>
-         微信：{{author}}
+    <div class="about-container g-wrap">
+        <p>么么哒~</p>
+        <p>Wechat：{{author}}</p>
     </div>
 </template>
 

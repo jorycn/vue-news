@@ -9,51 +9,41 @@ const router = new VueRouter({
 
 router.map({
   '/': {
-    name: 'index',
+    name: 'news',
     component: (resolve) => {
-      require(['./view/zhihu/index.vue'], resolve)
+      require(['./views/news/index.vue'], resolve)
+    }
+  },
+  '/zhihu': {
+    name: 'zhihu',
+    component: (resolve) => {
+      require(['./views/zhihu/index.vue'], resolve)
     }
   },
   '/zhihu/:id': {
     name: 'zhihu_show',
-    title: '',
     component: (resolve) => {
-      require(['./view/zhihu/show.vue'], resolve)
+      require(['./views/zhihu/show.vue'], resolve)
+    }
+  },
+  '/weixin': {
+    name: 'weixin',
+    component: (resolve) => {
+      require(['./views/a.vue'], resolve)
+    }
+  },
+  '/weibo': {
+    name: 'weibo',
+    component: (resolve) => {
+      require(['./views/b.vue'], resolve)
+    }
+  },
+  '/about': {
+    name: 'about',
+    component: (resolve) => {
+      require(['./views/about.vue'], resolve)
     }
   }
 })
-
-// router.map({
-//   '/': {
-//     name: 'index',
-//     component: (resolve) => {
-//       require(['./views/list.vue'], resolve)
-//     }
-//   },
-//   '/themes': {
-//     name: 'themes',
-//     component: (resolve) => {
-//       require(['./views/themes.vue'], resolve)
-//     }
-//   },
-//   '/themes/:id': {
-//     name: 'theme-list',
-//     component: (resolve) => {
-//       require(['./views/themeList.vue'], resolve)
-//     }
-//   },
-//   '/news/:id': {
-//     name: 'news',
-//     component: (resolve) => {
-//       require(['./views/news.vue'], resolve)
-//     }
-//   },
-//   '/about/': {
-//     name: 'about',
-//     component: (resolve) => {
-//       require(['./views/about.vue'], resolve)
-//     }
-//   }
-// })
 
 export default router

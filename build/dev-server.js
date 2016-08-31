@@ -8,7 +8,7 @@ var webpackConfig = process.env.NODE_ENV === 'testing'
   : require('./webpack.dev.conf')
 
 var imagebox    = require('../server/routes/imagebox')
-var api         = require('../server/routes/api') 
+var api         = require('../server/routes/api')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port

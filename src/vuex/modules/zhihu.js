@@ -1,7 +1,6 @@
 import {
-  SET_ARTICLES,
-  SET_DATE_POINTER,
-  SET_THEMES
+  ZHIHU_SET_ARTICLES,
+  ZHIHU_SET_DATE_POINTER
 } from '../mutation-types'
 
 const state = {
@@ -9,22 +8,18 @@ const state = {
     value: '',
     format: ''
   },
-  days: [],
-  themes: []
+  days: []
 }
 
 const mutations = {
-  [SET_ARTICLES] (state, date, arr) {
+  [ZHIHU_SET_ARTICLES] (state, date, arr) {
     state.days.push({
       date: date,
       articles: arr
     })
   },
-  [SET_DATE_POINTER] (state, value) {
+  [ZHIHU_SET_DATE_POINTER] (state, value) {
     state.datePointer = value
-  },
-  [SET_THEMES] (state, arr) {
-    state.themes = arr
   }
 }
 

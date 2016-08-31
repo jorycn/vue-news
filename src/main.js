@@ -5,7 +5,7 @@ import VueResource from 'vue-resource'
 import VueProgressbar from 'vue-progressbar'
 import { sync } from 'vuex-router-sync'
 
-import App from './view/app'
+import App from './views/app'
 import store from './vuex/store'
 import router from './route'
 import CovLocalDB from './util'
@@ -20,9 +20,6 @@ history.clear()
 let historyCount = history.getItem('count') * 1 || 0
 history.setItem('/', 0)
 
-/**
-* sync router loading status
-*/
 const commit = store.commit || store.dispatch
 router.beforeEach(({ to, from, next }) => {
   const toIndex = history.getItem(to.path)
@@ -71,10 +68,6 @@ Vue.prototype.$covImg = (self, uri, callback) => {
     .catch(err => {
       console.log(err)
     })
-}
-
-Vue.prototype.$Api = (url) => {
-  return window.location.origin + '/readapi?uri=' + url
 }
 
 Vue.config.debug = process.env.NODE_ENV === 'dev'

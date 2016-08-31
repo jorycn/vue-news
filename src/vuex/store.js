@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import Zhihu from './modules/zhihu'
+import News from './modules/news'
 
 Vue.use(Vuex)
 Vue.config.debug = true
@@ -14,7 +15,8 @@ const state = {
 
 export default new Vuex.Store({
   modules: {
-    Zhihu
+    Zhihu,
+    News
   },
   state,
   mutations: {

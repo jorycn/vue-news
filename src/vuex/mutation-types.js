@@ -1,4 +1,5 @@
 // 知乎
-export const SET_ARTICLES = 'SET_ARTICLES'
-export const SET_DATE_POINTER = 'SET_DATE_POINTER'
-export const SET_THEMES = 'SET_THEMES'
+export const ZHIHU_SET_ARTICLES = 'ZHIHU_SET_ARTICLES'
+export const ZHIHU_SET_DATE_POINTER = 'ZHIHU_SET_DATE_POINTER'
+// 今日头条
+export const NEWS_SET_ITEMS = 'NEWS_SET_ITEMS'

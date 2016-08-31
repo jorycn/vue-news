@@ -11,8 +11,9 @@
 
 <script>
 import covArticles from './articles.vue'
-import { setAticles, setDatePointer } from '../../vuex/action'
+import { zSetAticles, zSetDatePointer } from '../../vuex/action'
 import { Scroller, Spinner } from 'vux-components'
+import zhihuApi from '../../api/zhihu.js'
 
 export default {
   vuex: {
@@ -21,12 +22,8 @@ export default {
       days: ({ Zhihu }) => Zhihu.days
     },
     actions: {
-      setAticles,
-      setDatePointer
-    }
-  },
-  data () {
-    return {
+      zSetAticles,
+      zSetDatePointer
     }
   },
   components: {
@@ -38,41 +35,32 @@ export default {
     this.dataPointerCalc()
   },
   methods: {
-    load (uuid) {
-      setTimeout(() => {
-        this.dataPointerCalc(true, uuid)
-      }, 10)
-    },
     dataPointerCalc (plus, uuid) {
       if (!this.datePointer.value) {
-        this.setDatePointer(new Date())
+        this.zSetDatePointer(new Date())
         this.fetchList(uuid)
       } else {
         if (plus) {
           let nextDay = new Date(this.datePointer.format)
-          this.setDatePointer(new Date(nextDay - 86400000))
+          this.zSetDatePointer(new Date(nextDay - 86400000))
           this.fetchList(uuid)
         }
       }
     },
     fetchList (uuid) {
-      this.$http.get(this.$Api('http://news.at.zhihu.com/api/4/news/before/' + this.datePointer.value))
-        .then(response => {
-          const data = response.data
-          let arr = []
-          for (let article of data.stories) {
-            arr.push({
-              type: 'news',
-              title: article.title,
-              img: article.images[0],
-              id: article.id
-            })
-          }
-          this.setAticles(this.datePointer.format, arr)
-          setTimeout(() => {
-            this.$broadcast('pullup:reset', uuid)
-          }, 10)
-        })
+      zhihuApi.getList(this.datePointer.value, response => {
+        const data = response.data
+        let arr = []
+        for (let article of data.stories) {
+          arr.push({
+            type: 'news',
+            title: article.title,
+            img: article.images[0],
+            id: article.id
+          })
+        }
+        this.zSetAticles(this.datePointer.format, arr)
+      })
     }
   }
 }
