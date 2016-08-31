@@ -1,6 +1,6 @@
 <template>
     <Flexbox :gutter="0">
-      <flexbox-item :span="3/10"><img :src="data.img" alt="" @click="openDialog(url)"></flexbox-item>
+      <flexbox-item :span="3/10"><img :src="data.img" alt="" @click="openDialog()"></flexbox-item>
       <flexbox-item :span="6/10" @click="openDialog()">
         <p><span class="time">-&nbsp;{{data.date}}&nbsp;-</span></p>
         <p>{{data.title}}</p>
