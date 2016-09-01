@@ -34,10 +34,12 @@
 </script>
 
 <style scoped>
-  img{width: 64px;}
   .vux-flex-row{
     color: #888;
     padding: .4rem .2rem;
     border-bottom: 1px solid #efebeb;
+  }
+  .vux-flexbox .vux-flexbox-item{
+    padding:0 0.2rem;
   }
 </style>

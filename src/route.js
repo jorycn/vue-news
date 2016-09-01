@@ -9,15 +9,15 @@ const router = new VueRouter({
 
 router.map({
   '/': {
-    name: 'news',
-    component: (resolve) => {
-      require(['./views/news/index.vue'], resolve)
-    }
-  },
-  '/zhihu': {
     name: 'zhihu',
     component: (resolve) => {
       require(['./views/zhihu/index.vue'], resolve)
+    }
+  },
+  '/news': {
+    name: 'news',
+    component: (resolve) => {
+      require(['./views/news/index.vue'], resolve)
     }
   },
   '/zhihu/:id': {

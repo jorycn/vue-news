@@ -1,6 +1,6 @@
 <template>
     <Flexbox :gutter="0">
-      <flexbox-item :span="3/10"><img :src="data.img" alt="" @click="openDialog()"></flexbox-item>
+      <flexbox-item :span="3/10"><img :src="data.img" alt="" @click="openDialog()" width="100%"></flexbox-item>
       <flexbox-item :span="6/10" @click="openDialog()">
         <p><span class="time">-&nbsp;{{data.date}}&nbsp;-</span></p>
         <p>{{data.title}}</p>
@@ -37,7 +37,6 @@
 </script>
 
 <style scoped>
-  img{width: 100px;}
   .vux-flex-row{
     color: #737272;
     padding: .4rem .2rem;
@@ -46,5 +45,8 @@
   .time{
     color: #9c9b9b;
     margin: 0 0.2rem;
+  }
+  .vux-flexbox .vux-flexbox-item{
+    padding:0 0.2rem;
   }
 </style>

@@ -7,8 +7,8 @@
         <x-header :left-options="leftOptions" :title="title" @on-click-title="scrollTop"></x-header>
         <scroller lock-y :scrollbar-x=false>
           <div class="top-nav">
-            <div class="top-nav-item" :class="{ 'first-nav':isIndex }" v-link="{'name': 'news'}">今日头条</div>
-            <div class="top-nav-item" v-link="{'name': 'zhihu'}">知乎日报</div>
+            <div class="top-nav-item" :class="{ 'first-nav':isIndex }" v-link="{'name': 'zhihu'}">知乎日报</div>
+            <div class="top-nav-item" v-link="{'name': 'news'}">今日头条</div>
             <div class="top-nav-item disabled" v-link="{'name': 'weixin'}">微信精选</div>
             <div class="top-nav-item disabled" v-link="{'name': 'weibo'}">微博话题</div>
             <div class="top-nav-item" @click="openBlog">博客</div>
@@ -21,10 +21,10 @@
       :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"
       ></router-view>
     </view-box>
-    <dialog :show.sync="showDialog" class="dialog-article" :scroll="true">
+    <dialog :show.sync="showDialog" class="dialog-article" :scroll="false">
       <span class="vux-close" @click="showDialog=false"></span>
       <div class="img-box" v-bind:style="{ height:dialogHeight + 'px'}">
-        <iframe :src="dialogurl" frameborder="0" v-bind:style="{ height:dialogHeight + 'px'}" width="100%"></iframe>
+        <iframe :src="dialogurl" v-el:dframe frameborder="0" v-bind:style="{ height:dialogHeight + 'px'}" width="100%"></iframe>
       </div>
     </dialog>
   </div>
@@ -84,12 +84,16 @@ export default {
     }
   },
   created () {
-    this.dialogHeight = 600
+    this.dialogHeight = 400
   },
   events: {
     'open-dialog': function (url) {
       this.dialogurl = url
-      this.showDialog = true
+      store.dispatch('UPDATE_LOADING', true)
+      setTimeout(() => {
+        this.showDialog = true
+        store.dispatch('UPDATE_LOADING', false)
+      }, 500)
     }
   }
 }
