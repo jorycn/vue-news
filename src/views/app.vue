@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;">
+  <div style="height:100%;" id="g-xbhub" :class="{ 'open-dialog':showDialog }">
     <loading :show="isLoading" position="absolute"></loading>
     <view-box v-ref:view-box>
       <!--header slot-->
@@ -21,7 +21,7 @@
       :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"
       ></router-view>
     </view-box>
-    <dialog :show.sync="showDialog" class="dialog-article" :scroll="false">
+    <dialog :show.sync="showDialog" id="m-dialog" :scroll="false">
       <span class="vux-close" @click="showDialog=false"></span>
       <div class="img-box" v-bind:style="{ height:dialogHeight + 'px'}">
         <iframe :src="dialogurl" v-el:dframe frameborder="0" v-bind:style="{ height:dialogHeight + 'px'}" width="100%"></iframe>
@@ -63,7 +63,8 @@ export default {
       this.$refs.viewBox.$els.viewBoxBody.scrollTop = 0
     },
     openBlog () {
-      this.$dispatch('open-dialog', 'http://www.xbhub.com')
+      // this.$dispatch('open-dialog', 'http://www.xbhub.com')
+      window.location.href = 'http://www.xbhub.com'
     }
   },
   computed: {
@@ -226,12 +227,12 @@ html, body {
 .weui_dialog{
   width:98%
 }
-.vux-close {
+#g-xbhub .vux-close {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  width: 30px;
-  height: 30px;
+  width: 100%;
+  height: 20px;
   overflow: hidden;
   color: #ccc;
   &::before,

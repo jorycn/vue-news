@@ -30,7 +30,8 @@
     },
     methods: {
       openDialog () {
-        this.$dispatch('open-dialog', this.data.url)
+        // this.$dispatch('open-dialog', this.data.url)
+        window.location.href = this.data.url
       }
     }
   }
