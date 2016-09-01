@@ -35,19 +35,19 @@ export default {
     this.dataPointerCalc()
   },
   methods: {
-    dataPointerCalc (plus, uuid) {
+    dataPointerCalc (plus) {
       if (!this.datePointer.value) {
         this.zSetDatePointer(new Date())
-        this.fetchList(uuid)
+        this.fetchList()
       } else {
         if (plus) {
           let nextDay = new Date(this.datePointer.format)
           this.zSetDatePointer(new Date(nextDay - 86400000))
-          this.fetchList(uuid)
+          this.fetchList()
         }
       }
     },
-    fetchList (uuid) {
+    fetchList () {
       zhihuApi.getList(this.datePointer.value, response => {
         const data = response.data
         let arr = []

@@ -22,3 +22,8 @@ export const zSetDatePointer = ({ dispatch }, date) => {
 export const nSetItems = ({ dispatch }, arr) => {
   dispatch(types.NEWS_SET_ITEMS, arr)
 }
+
+// 微信精选
+export const wSetItems = ({ dispatch }, arr) => {
+  dispatch(types.WEIXIN_SET_ITEMS, arr)
+}

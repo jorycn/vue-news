@@ -6,17 +6,20 @@ import apiUtil from './util'
 Vue.use(VueResource)
 
 const config = {
-  key: '4516fa7241760c857ac2296f32e2174c'
+  key: '332f48d75b95fae97bd8643477e89307'
 }
 
 const ApiBox = {
-  get: 'http://v.juhe.cn/toutiao/index'
+  get: 'http://v.juhe.cn/weixin/query'
 }
 
+// 参数： pno：页数[1]，ps: 每页条数[100], dtype: [json]
+
 export default {
-  get (type, cb) {
+  get (pno, cb) {
     setTimeout(() => {
-      Vue.http.get(apiUtil.getApi(ApiBox.get + '?key=' + config.key + '&type=' + type + '&' + Math.random()))
+      let url = ApiBox.get + '?pno=' + pno + '&key=' + config.key + '&ps=10&dtype=&' + Math.random()
+      Vue.http.get(apiUtil.getApi(encodeURIComponent(url)))
       .then(response => {
         let data = response.data
         if (data.error_code !== 0) {

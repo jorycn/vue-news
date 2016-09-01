@@ -14,22 +14,22 @@ router.map({
       require(['./views/zhihu/index.vue'], resolve)
     }
   },
-  '/news': {
-    name: 'news',
-    component: (resolve) => {
-      require(['./views/news/index.vue'], resolve)
-    }
-  },
   '/zhihu/:id': {
     name: 'zhihu_show',
     component: (resolve) => {
       require(['./views/zhihu/show.vue'], resolve)
     }
   },
+  '/news': {
+    name: 'news',
+    component: (resolve) => {
+      require(['./views/news/index.vue'], resolve)
+    }
+  },
   '/weixin': {
     name: 'weixin',
     component: (resolve) => {
-      require(['./views/a.vue'], resolve)
+      require(['./views/weixin/index.vue'], resolve)
     }
   },
   '/weibo': {
