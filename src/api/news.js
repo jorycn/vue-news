@@ -16,7 +16,8 @@ const ApiBox = {
 export default {
   get (type, cb) {
     setTimeout(() => {
-      Vue.http.get(apiUtil.getApi(ApiBox.get + '?key=' + config.key + '&type=' + type + '&' + Math.random()))
+      let _url = ApiBox.get + '?key=' + config.key + '&type=' + type + '&' + Math.random()
+      Vue.http.get(apiUtil.getApi(encodeURIComponent(_url)))
       .then(response => {
         let data = response.data
         if (data.error_code !== 0) {

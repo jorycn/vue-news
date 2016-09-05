@@ -13,7 +13,8 @@ const ApiBox = {
 export default {
   getList (datePointer, cb) {
     setTimeout(() => {
-      Vue.http.get(apiUtil.getApi(ApiBox.getList + datePointer))
+      let _url = encodeURIComponent(ApiBox.getList + datePointer)
+      Vue.http.get(apiUtil.getApi(_url))
       .then(response => {
         cb(response)
       })
@@ -21,7 +22,8 @@ export default {
   },
   show (id, cb) {
     setTimeout(() => {
-      Vue.http.get(apiUtil.getApi(ApiBox.show + id))
+      let _url = encodeURIComponent(ApiBox.show + id)
+      Vue.http.get(apiUtil.getApi(_url))
       .then(response => {
         cb(response)
       })
