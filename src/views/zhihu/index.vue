@@ -33,6 +33,7 @@ export default {
   },
   created () {
     this.dataPointerCalc()
+    this.$dispatch('set-head', '知乎日报')
   },
   methods: {
     dataPointerCalc (plus) {

@@ -32,6 +32,7 @@ export default {
   },
   created () {
     this.loadData()
+    this.$dispatch('set-head', '今日头条')
   },
   methods: {
     loadData () {

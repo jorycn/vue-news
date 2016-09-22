@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import VueHead from 'vue-head'
 import VueProgressbar from 'vue-progressbar'
 import { sync } from 'vuex-router-sync'
 
@@ -14,6 +15,7 @@ Vue.use(VueProgressbar)
 Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(VueHead)
 
 let history = window.sessionStorage
 history.clear()

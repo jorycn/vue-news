@@ -4,13 +4,12 @@
     <view-box v-ref:view-box>
       <!--header slot-->
       <div class="g-header-box" slot="header">
-        <x-header :left-options="leftOptions" :title="title" @on-click-title="scrollTop"></x-header>
+        <x-header :left-options="leftOptions" :title="seo.title" @on-click-title="scrollTop"></x-header>
         <scroller lock-y :scrollbar-x=false>
           <div class="top-nav">
             <div class="top-nav-item" :class="{ 'first-nav':isIndex }" v-link="{'name': 'zhihu'}">知乎日报</div>
             <div class="top-nav-item" v-link="{'name': 'news'}">今日头条</div>
-            <div class="top-nav-item disabled" v-link="{'name': 'weixin'}">微信精选</div>
-            <div class="top-nav-item disabled" v-link="{'name': 'weibo'}">微博话题</div>
+            <div class="top-nav-item" v-link="{'name': 'weixin'}">微信精选</div>
             <div class="top-nav-item" @click="openBlog">博客</div>
             <div class="top-nav-item" v-link="{'name': 'about'}">关于</div>
           </div>
@@ -55,7 +54,10 @@ export default {
   data () {
     return {
       dialogurl: '',
-      showDialog: false
+      showDialog: false,
+      seo: {
+        title: 'Home'
+      }
     }
   },
   methods: {
@@ -73,19 +75,19 @@ export default {
         showBack: this.route.path !== '/'
       }
     },
-    title () {
-      if (this.route.path === '/') return '小白巷'
-      if (this.route.path.match(/zhihu/)) return '小白巷 - 知乎日报'
-      if (this.route.path.match(/weixin/)) return '小白巷 - 微信精选'
-      if (this.route.path.match(/weibo/)) return '小白巷 - 微博长文'
-      if (this.route.path.match(/about/)) return '小白巷 - 关于'
-    },
     isIndex () {
       return this.route.path === '/'
     }
   },
-  created () {
+  created: function () {
     this.dialogHeight = 400
+  },
+  head: {
+    title: function () {
+      return {
+        inner: this.seo.title
+      }
+    }
   },
   events: {
     'open-dialog': function (url) {
@@ -95,6 +97,12 @@ export default {
         this.showDialog = true
         store.dispatch('UPDATE_LOADING', false)
       }, 500)
+    },
+    'set-head': function (msg) {
+      setTimeout(() => {
+        this.seo.title = msg
+        this.$emit('updateHead')
+      })
     }
   }
 }
@@ -132,7 +140,7 @@ html, body {
         border:none;
       }
     }
-    
+
     &:first-child{
       margin-left:5px;
     }

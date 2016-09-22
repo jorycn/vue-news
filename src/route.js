@@ -10,6 +10,7 @@ const router = new VueRouter({
 router.map({
   '/': {
     name: 'zhihu',
+    title: '知乎日报',
     component: (resolve) => {
       require(['./views/zhihu/index.vue'], resolve)
     }
@@ -30,12 +31,6 @@ router.map({
     name: 'weixin',
     component: (resolve) => {
       require(['./views/weixin/index.vue'], resolve)
-    }
-  },
-  '/weibo': {
-    name: 'weibo',
-    component: (resolve) => {
-      require(['./views/b.vue'], resolve)
     }
   },
   '/about': {

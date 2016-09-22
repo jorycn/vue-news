@@ -2,6 +2,7 @@
     <div class="about-container g-wrap">
         <p>么么哒~</p>
         <p>Wechat：{{author}}</p>
+        <p>QQ : {{qq}}</p>
     </div>
 </template>
 
@@ -9,8 +10,12 @@
 export default {
   data () {
     return {
-      author: 'jorycn'
+      author: 'jorycn',
+      qq: '328516512'
     }
+  },
+  ready () {
+    this.$dispatch('set-head', 'About Me')
   }
 }
 </script>

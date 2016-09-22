@@ -47,6 +47,10 @@
             })
           }
         }
+        this.$nextTick(this.setHead)
+      },
+      setHead () {
+        this.$dispatch('set-head', this.news.title)
       },
       fetchNews (id) {
         zhihuApi.show(id, response => {

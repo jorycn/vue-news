@@ -22,6 +22,7 @@
     "request": "^2.74.0",
     "vue": "^1.0.18",
     "vue-disqus": "^1.0.2",
+    "vue-head": "^2.0.6",
     "vue-progressbar": "^0.2.5",
     "vue-resource": "^0.9.3",
     "vue-router": "^0.7.13",

@@ -34,6 +34,7 @@ export default {
   },
   created () {
     this.loadData()
+    this.$dispatch('set-head', '微信精选')
   },
   methods: {
     loadData (uuid) {
