@@ -1,7 +1,7 @@
 {
   "name": "xbhub",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "vue news",
   "author": "Jory <jorycn@163.com>",
   "private": true,
   "scripts": {
